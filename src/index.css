@@ -256,7 +256,7 @@ body {
 }
 
 /* 2-column grade button grid */
-.grade-list {
+.carClass-list {
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -267,7 +267,7 @@ body {
 }
 
 /* Individual grade button */
-.grade-btn {
+.class-btn {
   align-items: flex-start;
   background: var(--surface);
   border: 1.5px solid var(--border);
@@ -282,14 +282,14 @@ body {
   -webkit-user-select: none;
 }
 
-.grade-btn:active,
-.grade-btn.tapped {
+.class-btn:active,
+.class-btn.tapped {
   background: var(--surface2);
   border-color: var(--accent);
   transform: scale(0.95);
 }
 
-.grade-name {
+.class-name {
   color: var(--text);
   font-size: 20px;
   font-weight: 700;
@@ -298,7 +298,7 @@ body {
   align-self: center;
 }
 
-.grade-count {
+.class-count {
   color: var(--accent);
   font-family: 'DM Mono', monospace;
   font-size: 26px;
