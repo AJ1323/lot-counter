@@ -1,0 +1,435 @@
+/* ─────────────────────────────────────────
+   IMPORT FONTS
+   We use "DM Mono" for the numeric counts
+   and "Syne" for headings/labels — both
+   are distinctive and avoid generic looks.
+───────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap');
+
+/* ─────────────────────────────────────────
+   DESIGN TOKENS
+───────────────────────────────────────── */
+:root {
+  --bg:        #0c0c0f;
+  --surface:   #18181d;
+  --surface2:  #222228;
+  --border:    rgba(255,255,255,0.07);
+  --accent:    #c8f04a;
+  --accent-dk: #9abe2e;
+  --text:      #efefef;
+  --muted:     #666;
+  --danger:    #ff5f57;
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+
+  /* iPhone safe areas */
+  --safe-top:    env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ─────────────────────────────────────────
+   RESET & BASE
+───────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  height: 100%;
+  /* Prevent iOS text size adjustment on rotation */
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Syne', sans-serif;
+  /* Prevent iOS overscroll bounce */
+  overscroll-behavior: none;
+  overflow: hidden;
+}
+
+#root {
+  height: 100%;
+}
+
+/* ─────────────────────────────────────────
+   APP SHELL
+   Fills the full iPhone screen and clips
+   pages inside it.
+───────────────────────────────────────── */
+.app-shell {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* ─────────────────────────────────────────
+   PAGE BASE
+   Every page fills the shell.
+───────────────────────────────────────── */
+.page {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding-top:    calc(var(--safe-top) + 16px);
+  padding-bottom: calc(var(--safe-bottom) + 16px);
+  animation: pageFadeIn 0.3s ease both;
+}
+
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ─────────────────────────────────────────
+   PAGE 1 — LOT ENTRY
+───────────────────────────────────────── */
+.entry-page {
+  align-items: center;
+  justify-content: center;
+  padding-inline: 28px;
+}
+
+.entry-card {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+/* Logo / branding block */
+.logo-block {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.logo-icon {
+  font-size: 32px;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.logo-title {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text);
+}
+
+.entry-label {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Text input */
+.lot-input {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  color: var(--text);
+  font-family: 'Syne', sans-serif;
+  font-size: 17px;
+  padding: 16px 18px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s;
+}
+
+.lot-input::placeholder {
+  color: var(--muted);
+}
+
+.lot-input:focus {
+  border-color: var(--accent);
+}
+
+/* ─────────────────────────────────────────
+   SHARED BUTTONS
+───────────────────────────────────────── */
+.btn {
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-family: 'Syne', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  padding: 17px 20px;
+  width: 100%;
+  transition: opacity 0.15s, transform 0.1s;
+  -webkit-user-select: none;
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #000;
+}
+
+.btn-primary:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.btn-primary:not(:disabled):active {
+  background: var(--accent-dk);
+}
+
+.btn-finish {
+  background: #fff;
+  color: #000;
+}
+
+.btn-finish:active {
+  background: #ddd;
+}
+
+/* ─────────────────────────────────────────
+   PAGE 2 — COUNTING
+───────────────────────────────────────── */
+.counting-page {
+  padding-inline: 16px;
+  gap: 0;
+}
+
+/* Header row: lot badge + running total */
+.counting-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 4px 16px;
+}
+
+.lot-badge {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  color: var(--accent);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  max-width: 60%;
+  overflow: hidden;
+  padding: 6px 14px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.total-chip {
+  align-items: baseline;
+  display: flex;
+  gap: 4px;
+}
+
+.total-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 32px;
+  font-weight: 500;
+  color: var(--accent);
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+.total-lbl {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* 2-column grade button grid */
+.grade-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 8px;
+}
+
+/* Individual grade button */
+.grade-btn {
+  align-items: flex-start;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-height: 90px;
+  padding: 16px;
+  transition: border-color 0.15s, transform 0.08s, background 0.1s;
+  -webkit-user-select: none;
+}
+
+.grade-btn:active,
+.grade-btn.tapped {
+  background: var(--surface2);
+  border-color: var(--accent);
+  transform: scale(0.95);
+}
+
+.grade-name {
+  color: var(--text);
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  line-height: 1;
+  align-self: center;
+}
+
+.grade-count {
+  color: var(--accent);
+  font-family: 'DM Mono', monospace;
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -1px;
+  line-height: 1;
+}
+
+/* Footer with Finished button */
+.counting-footer {
+  padding-top: 12px;
+  flex-shrink: 0;
+}
+
+/* ─────────────────────────────────────────
+   PAGE 3 — RESULTS
+───────────────────────────────────────── */
+.results-page {
+  padding-inline: 20px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+ 
+.results-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  min-height: 100%;
+}
+ 
+.results-header {
+  padding: 8px 0 24px;
+}
+ 
+.results-meta {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+ 
+.results-lot {
+  color: var(--accent);
+  font-size: 28px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  word-break: break-word;
+}
+ 
+/* Results rows */
+.results-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+  margin-bottom: 20px;
+}
+ 
+.result-row {
+  position: relative;
+  overflow: hidden;
+  align-items: center;
+  animation: rowIn 0.4s ease both;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 18px;
+}
+ 
+@keyframes rowIn {
+  from { opacity: 0; transform: translateX(-14px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+ 
+/* Color fill bar — width = (this grade's count / highest count) * 100%
+   Animates in after the row itself slides in, so it feels like a reveal. */
+.result-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: var(--fill-pct, 0%);
+  background: var(--fill-color, var(--accent));
+  opacity: 0.22;
+  border-radius: inherit;
+  /* Delay slightly so the row slide-in finishes first */
+  transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+ 
+.result-grade {
+  position: relative;
+  z-index: 1;
+  color: var(--text);
+  font-size: 17px;
+  font-weight: 600;
+}
+ 
+.result-value {
+  position: relative;
+  z-index: 1;
+  color: var(--text);
+  font-family: 'DM Mono', monospace;
+  font-size: 26px;
+  font-weight: 500;
+  letter-spacing: -1px;
+}
+ 
+.result-value.zero {
+  color: var(--muted);
+  font-size: 20px;
+}
+ 
+/* Grand total row — solid accent, no fill bar needed */
+.result-total {
+  background: var(--accent);
+  border-color: transparent;
+  margin-top: 4px;
+}
+ 
+.result-total .result-grade,
+.result-total .result-value {
+  color: #000;
+}
+ 
+.btn-next {
+  flex-shrink: 0;
+  margin-bottom: 8px;
+}
+
