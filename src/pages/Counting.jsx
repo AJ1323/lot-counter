@@ -1,18 +1,21 @@
 import { useState } from 'react'
  
-const GRADES = ['A/B', 'C', 'D/E', 'F', 'W', 'S', 'Z', 'L', 'OOS/Recall', 'PM']
+const CarClasses = ['A/B', 'C', 'D/E', 'F', 'W', 'S', 'Z', 'L','V','P/XV','K',
+  'XC', 'XB','XF','XG','XH','XD','XP','XK','XW','XS','XL','XA','XE','XZ',
+  'PM','REG','DETAIL','WHSL/SELL/TRBK','OOS/Recall', 'SOLD','TIRE','PARTS/BD/GLASS',
+'NO KEY']
  
 
  
 export default function Counting({ lotName, onFinish }) {
   const [counts, setCounts] = useState(() =>
-    Object.fromEntries(GRADES.map((g) => [g, 0]))
+    Object.fromEntries(CarClasses.map((g) => [g, 0]))
   )
   const [lastTapped, setLastTapped] = useState(null)
  
-  const increment = (grade) => {
-    setCounts((prev) => ({ ...prev, [grade]: prev[grade] + 1 }))
-    setLastTapped(grade)
+  const increment = (carClass) => {
+    setCounts((prev) => ({ ...prev, [carClass]: prev[carClass] + 1 }))
+    setLastTapped(carClass)
     setTimeout(() => setLastTapped(null), 150)
     if (navigator.vibrate) navigator.vibrate(10)
   }
@@ -31,18 +34,18 @@ export default function Counting({ lotName, onFinish }) {
       </div>
  
       {/* Grade buttons — single column, vertical list */}
-      <div className="grade-list">
-        {GRADES.map((grade) => {
-          const count = counts[grade]
+      <div className="carClass-list">
+        {CarClasses.map((carClass) => {
+          const count = counts[carClass]
  
           return (
             <button
-              key={grade}
-              className={`grade-btn ${lastTapped === grade ? 'tapped' : ''}`}
-              onClick={() => increment(grade)}
+              key={carClass}
+              className={`class-btn ${lastTapped === carClass ? 'tapped' : ''}`}
+              onClick={() => increment(carClass)}
             >
               {/* Label sits on top of the fill */}
-              <span className="grade-name">{grade}</span>
+              <span className="class-name">{carClass}</span>
             </button>
           )
         })}
