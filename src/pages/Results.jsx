@@ -1,8 +1,11 @@
 // Must match Counting.jsx
-const GRADES = ['A/B', 'C', 'D/E', 'F', 'W', 'S', 'Z', 'L', 'OOS/Recall', 'PM']
+const CarClasses = ['A/B', 'C', 'D/E', 'F', 'W', 'S', 'Z', 'L','V','P/XV','K',
+  'XC', 'XB','XF','XG','XH','XD','XP','XK','XW','XS','XL','XA','XE','XZ',
+  'PM','REG','DETAIL','WHSL/SELL/TRBK','OOS/Recall', 'SOLD','TIRE','PARTS/BD/GLASS',
+'NO KEY']
  
 // Same color map as Counting.jsx so each grade is consistent across both pages
-const GRADE_COLORS = {
+const CLASS_COLORS = {
   'A/B':        '#4ade80',
   'C':          '#60a5fa',
   'D/E':        '#f59e0b',
@@ -10,7 +13,9 @@ const GRADE_COLORS = {
   'W':          '#a78bfa',
   'S':          '#34d399',
   'Z':          '#fb923c',
-  'L':          '#38bdf8',
+  'L':          '#2ba4d7',
+  'V':          '#024968',
+  'P/XV':       '#0df109',
   'OOS/Recall': '#f472b6',
   'PM':         '#e879f9',
 }
@@ -22,7 +27,7 @@ export default function Results({ lotName, counts, onNextLot }) {
   const total = Object.values(counts).reduce((a, b) => a + b, 0)
  
   // Find the highest single-grade count to use as the 100% baseline
-  const maxCount = Math.max(...GRADES.map((g) => counts[g] ?? 0), 1)
+  const maxCount = Math.max(...carClasses.map((g) => counts[g] ?? 0), 1)
  
   return (
     <div className="page results-page">
@@ -35,15 +40,15 @@ export default function Results({ lotName, counts, onNextLot }) {
  
         {/* Count rows */}
         <div className="results-list">
-          {GRADES.map((grade, i) => {
-            const count = counts[grade] ?? 0
-            const color = GRADE_COLORS[grade]
+          {carClasses.map((carClass, i) => {
+            const count = counts[carClass] ?? 0
+            const color = CLASS_COLORS[carClass]
             // Percentage of the highest count; 0 count = no fill
             const fillPct = count === 0 ? 0 : (count / maxCount) * 100
  
             return (
               <div
-                key={grade}
+                key={carClass}
                 className="result-row"
                 style={{
                   animationDelay: `${i * 45}ms`,
@@ -53,7 +58,7 @@ export default function Results({ lotName, counts, onNextLot }) {
               >
                 {/* Color fill bar — same mechanic as counting page */}
                 <span className="result-fill" />
-                <span className="result-grade">{grade}</span>
+                <span className="result-grade">{carClass}</span>
                 <span className={`result-value ${count === 0 ? 'zero' : ''}`}>
                   {count}
                 </span>
