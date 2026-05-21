@@ -34,9 +34,6 @@ export default function Counting({ lotName, onFinish }) {
       <div className="grade-list">
         {GRADES.map((grade) => {
           const count = counts[grade]
-    
-          // Fill % capped at 100, minimum visible sliver when count > 0
-          const fillPct = count === 0 ? 0 : Math.min(Math.max((count / MAX_COUNT) * 100, 6), 100)
  
           return (
             <button
