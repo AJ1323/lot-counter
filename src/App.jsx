@@ -3,35 +3,28 @@ import LotEntry from './pages/LotEntry'
 import Counting from './pages/Counting'
 import Results from './pages/Results'
 
-// The three "pages" of the app. We handle navigation with simple state
-// instead of a router since this is a small single-page app.
-export default function App() {
-  // 'entry' | 'counting' | 'results | ' 
-  const [page, setPage] = useState('entry')       
-  const [lotName, setLotName] = useState('')
-  const [counts, setCounts] = useState({})
-  const [countedLots, setCountedLots] = useState([])
-  // for viewing past lots
-  const [viewingLot, setViewingLot] = useState(null) 
+// Use states instead of a router as this is a fairly simple app.
+// 3 main pages while "Storing" in an array the states of "past" results
+//pages that can be viewed.
+const [page, setPage] = useState('entry')       
+const [lotName, setLotName] = useState('')
+const [counts, setCounts] = useState({})
+const [countedLots, setCountedLots] = useState([])
+const [viewingLot, setViewingLot] = useState(null) 
 
-  const handleStart = (name) => {
-    setLotName(name)
-    setCounts({})
-    setPage('counting')
-  }
+const handleStart = (name) => {
+  setLotName(name)
+  setCounts({})
+  setPage('counting')
+}
 
-  const handleFinish = (finalCounts) => {
-    setCounts(finalCounts)
-    setPage('results')
-  }
-
-  function handleFinishCounting() {
-  setCountedLots(prev => [...prev, { name: lotName, counts }])
-  setPage('entry')
+const handleFinish = (finalCounts) => {
+  setCounts(finalCounts)
+  setCountedLots(prev => [...prev, { name: lotName, counts: finalCounts }])
+  setPage('results')
 }
 
 function handleNextLot() {
-  // already saved, just reset for new entry
   setLotName('')
   setCounts({})
   setPage('entry')
@@ -49,8 +42,16 @@ function handleFinishedCounting() {
 
   return (
     <div className="app-shell">
-      {page === 'entry'    && <LotEntry onStart={handleStart} />}
+      {page === 'entry' && (
+       <LotEntry
+      onStart={handleStart}
+      countedLots={countedLots}
+      onViewLot={handleViewLot}
+      onFinishedCounting={handleFinishedCounting}
+      />
+      )}
       {page === 'counting' && <Counting lotName={lotName} onFinish={handleFinish} />}
+
       {page === 'results' && (
         <Results
           lotName={viewingLot ? viewingLot.name : lotName}
@@ -63,5 +64,5 @@ function handleFinishedCounting() {
       )}
     </div>
   )
-}
+
 
