@@ -6,6 +6,8 @@
 ───────────────────────────────────────── */
 @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@400;500&display=swap');
+
 /* ─────────────────────────────────────────
    DESIGN TOKENS
 ───────────────────────────────────────── */
@@ -23,7 +25,6 @@
   --radius-md: 16px;
   --radius-lg: 22px;
 
-  /* iPhone safe areas */
   --safe-top:    env(safe-area-inset-top, 0px);
   --safe-bottom: env(safe-area-inset-bottom, 0px);
 }
@@ -40,7 +41,6 @@
 
 html {
   height: 100%;
-  /* Prevent iOS text size adjustment on rotation */
   -webkit-text-size-adjust: 100%;
 }
 
@@ -49,7 +49,6 @@ body {
   background: var(--bg);
   color: var(--text);
   font-family: 'Syne', sans-serif;
-  /* Prevent iOS overscroll bounce */
   overscroll-behavior: none;
   overflow: hidden;
 }
@@ -60,8 +59,6 @@ body {
 
 /* ─────────────────────────────────────────
    APP SHELL
-   Fills the full iPhone screen and clips
-   pages inside it.
 ───────────────────────────────────────── */
 .app-shell {
   height: 100%;
@@ -72,7 +69,6 @@ body {
 
 /* ─────────────────────────────────────────
    PAGE BASE
-   Every page fills the shell.
 ───────────────────────────────────────── */
 .page {
   flex: 1;
@@ -106,16 +102,15 @@ body {
   gap: 14px;
 }
 
-/* Logo / branding block */
 .logo-block {
-  display: column;
+  display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 10px;
   margin-bottom: 12px;
 }
 
 .logo-img {
-  align-self: center;
   height: 40px;
   width: auto;
 }
@@ -135,7 +130,6 @@ body {
   color: var(--muted);
 }
 
-/* Text input */
 .lot-input {
   background: var(--surface);
   border: 1.5px solid var(--border);
@@ -155,50 +149,6 @@ body {
 
 .lot-input:focus {
   border-color: var(--accent);
-}
-
-/* ─────────────────────────────────────────
-   SHARED BUTTONS
-───────────────────────────────────────── */
-.btn {
-  border: none;
-  border-radius: var(--radius-md);
-  cursor: pointer;
-  font-family: 'Syne', sans-serif;
-  font-size: 17px;
-  font-weight: 700;
-  letter-spacing: -0.2px;
-  padding: 17px 20px;
-  width: 100%;
-  transition: opacity 0.15s, transform 0.1s;
-  -webkit-user-select: none;
-}
-
-.btn:active {
-  transform: scale(0.96);
-}
-
-.btn-primary {
-  background: var(--accent);
-  color: #000;
-}
-
-.btn-primary:disabled {
-  opacity: 0.3;
-  cursor: default;
-}
-
-.btn-primary:not(:disabled):active {
-  background: var(--accent-dk);
-}
-
-.btn-finish {
-  background: #fff;
-  color: #000;
-}
-
-.btn-finish:active {
-  background: #ddd;
 }
 
 /* ─────────────────────────────────────────
@@ -260,6 +210,55 @@ body {
 }
 
 /* ─────────────────────────────────────────
+   SHARED BUTTONS
+───────────────────────────────────────── */
+.btn {
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  font-family: 'Syne', sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  padding: 17px 20px;
+  width: 100%;
+  transition: opacity 0.15s, transform 0.1s;
+  -webkit-user-select: none;
+}
+
+.btn:active {
+  transform: scale(0.96);
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #000;
+}
+
+.btn-primary:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.btn-primary:not(:disabled):active {
+  background: var(--accent-dk);
+}
+
+.btn-finish {
+  background: #fff;
+  color: #000;
+}
+
+.btn-finish:active {
+  background: #ddd;
+}
+
+.btn-next {
+  flex-shrink: 0;
+  margin-bottom: 8px;
+}
+
+/* ─────────────────────────────────────────
    PAGE 2 — COUNTING
 ───────────────────────────────────────── */
 .counting-page {
@@ -267,12 +266,11 @@ body {
   gap: 0;
 }
 
-/* Header row: lot badge + running total */
 .counting-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 4px 16px;
+  padding: 10px 4px 8px;
 }
 
 .lot-badge {
@@ -313,7 +311,24 @@ body {
   text-transform: uppercase;
 }
 
-/* 2-column grade button grid */
+/* Clean / Dirty column headers */
+.col-headers {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 4px 4px 6px;
+}
+
+.col-header {
+  text-align: center;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* Scrollable list of rows */
 .carClass-list {
   display: flex;
   flex-direction: column;
@@ -324,7 +339,14 @@ body {
   padding-bottom: 8px;
 }
 
-/* Individual grade button */
+/* Each row: two buttons side by side */
+.class-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+/* Individual class button */
 .class-btn {
   align-items: flex-start;
   background: var(--surface);
@@ -347,6 +369,22 @@ body {
   transform: scale(0.95);
 }
 
+.clean-btn:active,
+.clean-btn.tapped {
+  border-color: #4ade80;
+}
+
+.dirty-btn:active,
+.dirty-btn.tapped {
+  border-color: #f87171;
+}
+
+/* Universal buttons span both columns */
+.universal-btn {
+  grid-column: 1 / -1;
+  min-height: 60px;
+}
+
 .class-name {
   color: var(--text);
   font-size: 20px;
@@ -365,7 +403,6 @@ body {
   line-height: 1;
 }
 
-/* Footer with Finished button */
 .counting-footer {
   padding-top: 12px;
   flex-shrink: 0;
@@ -379,18 +416,18 @@ body {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
 }
- 
+
 .results-inner {
   display: flex;
   flex-direction: column;
-  gap: 0;
   min-height: 100%;
 }
- 
+
 .results-header {
-  padding: 8px 0 24px;
+  padding: 8px 0 20px;
+  flex-shrink: 0;
 }
- 
+
 .results-meta {
   color: var(--muted);
   font-size: 12px;
@@ -399,7 +436,7 @@ body {
   text-transform: uppercase;
   margin-bottom: 4px;
 }
- 
+
 .results-lot {
   color: var(--accent);
   font-size: 28px;
@@ -407,85 +444,134 @@ body {
   letter-spacing: -0.5px;
   word-break: break-word;
 }
- 
-/* Results rows */
-.results-list {
+
+/* Scrollable body containing all sections */
+.results-body {
   display: flex;
   flex-direction: column;
   gap: 8px;
   flex: 1;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 }
- 
+
+/* Each section: Clean, Dirty, Other */
+.results-section {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 8px;
+}
+
+.results-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--muted);
+  padding: 0 4px 2px;
+}
+
+.clean-title  { color: #4ade80; }
+.dirty-title  { color: #f87171; }
+
+/* Clean + Dirty sit side by side */
+.results-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  align-items: start;
+}
+
+/* Result row: grade | count — simple 2-col */
 .result-row {
   position: relative;
   overflow: hidden;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
   animation: rowIn 0.4s ease both;
   background: var(--surface);
   border: 1.5px solid var(--border);
   border-radius: var(--radius-md);
-  display: flex;
-  justify-content: space-between;
-  padding: 14px 18px;
+  padding: 12px 16px;
 }
- 
+
 @keyframes rowIn {
   from { opacity: 0; transform: translateX(-14px); }
   to   { opacity: 1; transform: translateX(0); }
 }
- 
-/* Color fill bar — width = (this grade's count / highest count) * 100%
-   Animates in after the row itself slides in, so it feels like a reveal. */
+
 .result-fill {
   position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
+  left: 0; top: 0; bottom: 0;
   width: var(--fill-pct, 0%);
   background: var(--fill-color, var(--accent));
   opacity: 0.22;
   border-radius: inherit;
-  /* Delay slightly so the row slide-in finishes first */
   transition: width 0.5s cubic-bezier(0.22, 1, 0.36, 1);
   pointer-events: none;
 }
- 
+
 .result-grade {
   position: relative;
   z-index: 1;
   color: var(--text);
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 600;
 }
- 
+
 .result-value {
   position: relative;
   z-index: 1;
   color: var(--text);
   font-family: 'DM Mono', monospace;
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 500;
   letter-spacing: -1px;
 }
- 
+.results-columns .result-grade {
+  font-size: 12px;
+}
+
+.results-columns .result-value {
+  font-size: 16px;
+}
+
+.results-columns .result-value.zero {
+  font-size: 13px;
+}
+
+.results-columns .result-row {
+  padding: 8px 10px;
+}
+
 .result-value.zero {
   color: var(--muted);
-  font-size: 20px;
+  font-size: 16px;
 }
- 
-/* Grand total row — solid accent, no fill bar needed */
-.result-total {
+
+.result-subtotal {
+  background: var(--surface2);
+  border-color: var(--border);
+}
+
+.result-subtotal .result-grade {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.result-grandtotal {
   background: var(--accent);
   border-color: transparent;
+  border-radius: var(--radius-md);
   margin-top: 4px;
 }
- 
-.result-total .result-grade,
-.result-total .result-value {
+
+.result-grandtotal .result-grade,
+.result-grandtotal .result-value {
   color: #000;
 }
- 
+
 .btn-next {
   flex-shrink: 0;
   margin-bottom: 8px;
