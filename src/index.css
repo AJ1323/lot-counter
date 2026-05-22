@@ -108,16 +108,16 @@ body {
 
 /* Logo / branding block */
 .logo-block {
-  display: flex;
+  display: column;
   align-items: center;
   gap: 10px;
   margin-bottom: 12px;
 }
 
-.logo-icon {
-  font-size: 32px;
-  color: var(--accent);
-  line-height: 1;
+.logo-img {
+  align-self: center;
+  height: 40px;
+  width: auto;
 }
 
 .logo-title {

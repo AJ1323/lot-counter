@@ -19,7 +19,9 @@ export default function LotEntry({ onStart, countedLots, onViewLot, onFinishedCo
     <div className="page entry-page">
       <div className="entry-card">
         <div className="logo-block">
-          <span className="logo-icon">Avis</span>
+          <span className="logo-icon">
+            <img src="/Avis_Budget_Group_logo.svg.png" alt="Logo" />
+          </span>
           <h1 className="logo-title">LotCounter</h1>
         </div>
 
@@ -37,6 +39,14 @@ export default function LotEntry({ onStart, countedLots, onViewLot, onFinishedCo
           autoCorrect="off"
           spellCheck="false"
         />
+
+        <button
+          className="btn btn-primary"
+          onClick={handleSubmit}
+          disabled={!value.trim()}
+        >
+          Submit
+        </button>
         
          {/* ── Counted Lots ── */}
         {countedLots.length > 0 && (
@@ -63,13 +73,7 @@ export default function LotEntry({ onStart, countedLots, onViewLot, onFinishedCo
           </div>
         )}
 
-        <button
-          className="btn btn-primary"
-          onClick={handleSubmit}
-          disabled={!value.trim()}
-        >
-          Submit
-        </button>
+        
       </div>      
     </div>
   )

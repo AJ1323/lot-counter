@@ -3,6 +3,8 @@ import LotEntry from './pages/LotEntry'
 import Counting from './pages/Counting'
 import Results from './pages/Results'
 
+
+export default function App() {
 // Use states instead of a router as this is a fairly simple app.
 // 3 main pages while "Storing" in an array the states of "past" results
 //pages that can be viewed.
@@ -64,5 +66,5 @@ function handleFinishedCounting() {
       )}
     </div>
   )
-
+}
 
