@@ -1,5 +1,5 @@
 // Must match Counting.jsx
-const CarClasses = ['A/B', 'C', 'D/E', 'F', 'W', 'S', 'Z', 'L','V','P/XV','K',
+const carClasses = ['A/B', 'C', 'D/E', 'F', 'W', 'S', 'Z', 'L','V','P/XV','K',
   'XC', 'XB','XF','XG','XH','XD','XP','XK','XW','XS','XL','XA','XE','XZ',
   'PM','REG','DETAIL','WHSL/SELL/TRBK','OOS/Recall', 'SOLD','TIRE','PARTS/BD/GLASS',
 'NO KEY']
@@ -77,7 +77,7 @@ export default function Results({ lotName, counts, onNextLot }) {
                   '--fill-pct': `${fillPct}%`,
                 }}
               >
-                {/* Color fill bar — same mechanic as counting page */}
+                {/* Color fill bar  */}
                 <span className="result-fill" />
                 <span className="result-grade">{carClass}</span>
                 <span className={`result-value ${count === 0 ? 'zero' : ''}`}>
