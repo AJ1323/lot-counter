@@ -4,7 +4,7 @@ const CarClasses = ['A/B', 'C', 'D/E', 'F', 'W', 'S', 'Z', 'L','V','P/XV','K',
   'PM','REG','DETAIL','WHSL/SELL/TRBK','OOS/Recall', 'SOLD','TIRE','PARTS/BD/GLASS',
 'NO KEY']
  
-// Same color map as Counting.jsx so each grade is consistent across both pages
+
 const CLASS_COLORS = {
   'A/B':        '#4ade80',
   'C':          '#60a5fa',
@@ -15,9 +15,30 @@ const CLASS_COLORS = {
   'Z':          '#fb923c',
   'L':          '#2ba4d7',
   'V':          '#024968',
-  'P/XV':       '#0df109',
-  'OOS/Recall': '#f472b6',
-  'PM':         '#e879f9',
+  'K':          '#8f1923',
+  'XC':         '#0962f1',
+  'XB':         '#386038',
+  'XF':         '#09f1de',
+  'XG':         '#2009f1',
+  'XH':         '#9009f1',
+  'XD':         '#f1099c',
+  'XP':         '#a7f109',
+  'XK':         '#f1e509',
+  'XW':         '#f1a709',
+  'XS':         '#f18509',
+  'XL':         '#f14b09',
+  'XA':         '#153456',
+  'XE':         '#126279',
+  'XZ':         '#09f1ca',
+  'PM':         '#f109c6',
+  'REG':       '#a53b75',
+  'DETAIL':       '#ad4b77',
+  'WHSL/SELL/TRBK':       '#f10909',
+  'OOS/RECALL':       '#0df109',
+  'SOLD': '#f472b6',
+  'TIRE':         '#e879f9',
+  'PARTS/BD/GLASS':       '#0df109',
+  'NO KEY':       '#0df109',
 }
  
 // PAGE 3 — results with color fill bars scaled relative to the highest count.
