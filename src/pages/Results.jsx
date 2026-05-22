@@ -44,7 +44,7 @@ const CLASS_COLORS = {
 // PAGE 3 — results with color fill bars scaled relative to the highest count.
 // The grade with the most presses = 100% fill. Every other grade is a
 // percentage of that maximum, so proportions are visually obvious at a glance.
-export default function Results({ lotName, counts, onNextLot }) {
+export default function Results({ lotName, counts, onNextLot, isReviewing }) {
   const total = Object.values(counts).reduce((a, b) => a + b, 0)
  
   // Find the highest single-grade count to use as the 100% baseline
@@ -95,7 +95,7 @@ export default function Results({ lotName, counts, onNextLot }) {
         </div>
  
         <button className="btn btn-primary btn-next" onClick={onNextLot}>
-          Next Lot →
+          {isReviewing ? 'Done' : 'Next Lot →'}
         </button>
       </div>
     </div>

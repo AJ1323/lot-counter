@@ -58,6 +58,7 @@ function handleFinishedCounting() {
         <Results
           lotName={viewingLot ? viewingLot.name : lotName}
           counts={viewingLot ? viewingLot.counts : counts}
+          isReviewing={!!viewingLot}
           onNextLot={viewingLot
             ? () => { setViewingLot(null); setPage('entry') }
             : handleNextLot
