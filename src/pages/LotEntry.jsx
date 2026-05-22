@@ -2,7 +2,7 @@ import { useState } from 'react'
 
 // PAGE 1 — shown on first load and after "Next Lot" is pressed.
 // Collects the lot name and passes it up to App via onStart().
-export default function LotEntry({ onStart }) {
+export default function LotEntry({ onStart, countedLots, onViewLot, onFinishedCounting }) {
   const [value, setValue] = useState('')
 
   const handleSubmit = () => {
@@ -19,7 +19,7 @@ export default function LotEntry({ onStart }) {
     <div className="page entry-page">
       <div className="entry-card">
         <div className="logo-block">
-          <span className="logo-icon">⬡</span>
+          <span className="logo-icon">Avis</span>
           <h1 className="logo-title">LotCounter</h1>
         </div>
 
@@ -37,6 +37,31 @@ export default function LotEntry({ onStart }) {
           autoCorrect="off"
           spellCheck="false"
         />
+        
+         {/* ── Counted Lots ── */}
+        {countedLots.length > 0 && (
+          <div className="counted-lots">
+            <p className="entry-label">Counted Lots</p>
+            <div className="counted-list">
+              {countedLots.map((lot, i) => (
+                <button
+                  key={i}
+                  className="btn counted-lot-btn"
+                  onClick={() => onViewLot(lot)}
+                >
+                  <span className="counted-lot-name">{lot.name}</span>
+                  <span className="counted-lot-total">
+                    {Object.values(lot.counts).reduce((a, b) => a + b, 0)}
+                  </span>
+                </button>
+              ))}
+            </div>
+
+            <button className="btn btn-finish" onClick={onFinishedCounting}>
+              Finished Counting
+            </button>
+          </div>
+        )}
 
         <button
           className="btn btn-primary"
@@ -45,7 +70,7 @@ export default function LotEntry({ onStart }) {
         >
           Submit
         </button>
-      </div>
+      </div>      
     </div>
   )
 }

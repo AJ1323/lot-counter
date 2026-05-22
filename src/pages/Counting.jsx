@@ -33,7 +33,7 @@ export default function Counting({ lotName, onFinish }) {
         </div>
       </div>
  
-      {/* Grade buttons — single column, vertical list */}
+      {/* Type buttons — single column, vertical list */}
       <div className="carClass-list">
         {CarClasses.map((carClass) => {
           const count = counts[carClass]
