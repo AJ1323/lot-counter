@@ -154,6 +154,14 @@ body {
 /* ─────────────────────────────────────────
    COUNTED LOTS SECTION
 ───────────────────────────────────────── */
+
+.counted-title {
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--text);
+}
+
 .counted-lots {
   display: flex;
   flex-direction: column;

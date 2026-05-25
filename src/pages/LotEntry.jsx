@@ -47,22 +47,23 @@ export default function LotEntry({ onStart, countedLots, onViewLot, onFinishedCo
         >
           Submit
         </button>
-        
-         {/* ── Counted Lots ── */}
-        {countedLots.map((lot, i) => {
-          const total =
-            Object.values(lot.counts.clean ?? {}).reduce((a, b) => a + b, 0) +
-            Object.values(lot.counts.dirty ?? {}).reduce((a, b) => a + b, 0) +
-            Object.values(lot.counts.universal ?? {}).reduce((a, b) => a + b, 0)
+        <div className='counted-block'>
+          <h2 className='counted-title'>Counted Lots</h2>
+          {/* ── Counted Lots ── */}
+          {countedLots.map((lot, i) => {
+            const total =
+              Object.values(lot.counts.clean ?? {}).reduce((a, b) => a + b, 0) +
+              Object.values(lot.counts.dirty ?? {}).reduce((a, b) => a + b, 0) +
+              Object.values(lot.counts.universal ?? {}).reduce((a, b) => a + b, 0)
 
-          return (
-            <button key={i} className="btn counted-lot-btn" onClick={() => onViewLot(lot)}>
-              <span className="counted-lot-name">{lot.name}</span>
-              <span className="counted-lot-total">{total}</span>
-            </button>
-          )
-          })}
-           
+            return (
+              <button key={i} className="btn counted-lot-btn" onClick={() => onViewLot(lot)}>
+                <span className="counted-lot-name">{lot.name}</span>
+                <span className="counted-lot-total">{total}</span>
+              </button>
+            )
+            })}
+          </div> 
 
             <button className="btn btn-finish" onClick={onFinishedCounting}>
               Finished Counting
