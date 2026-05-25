@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const REGULAR_CLASSES = ['A/B', 'C', 'D/E', 'F', 'W', 'S', 'Z', 'L', 'V', 'P/XV', 'K',
+const REGULAR_CLASSES = ['A/B', 'C', 'D/E','G','H', 'F', 'W', 'S', 'Z', 'L', 'V', 'P/XV', 'K',
   'XC', 'XB', 'XF', 'XG', 'XH', 'XD', 'XP', 'XK', 'XW', 'XS', 'XL', 'XA', 'XE', 'XZ']
 
 const UNIVERSAL_CLASSES = ['PM', 'REG', 'DETAIL', 'WHSL/SELL/TRBK', 'OOS/Recall',
