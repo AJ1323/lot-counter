@@ -42,6 +42,7 @@ function handleFinishedCounting() {
   setViewingLot(null)
 }
 
+
   return (
     <div className="app-shell">
       {page === 'entry' && (

@@ -393,6 +393,12 @@ body {
   min-height: 60px;
 }
 
+.class-btn.swiped {
+  background: rgba(248, 113, 113, 0.15);
+  border-color: #f87171;
+  transform: scale(0.95);
+}
+
 .class-name {
   color: var(--text);
   font-size: 20px;
