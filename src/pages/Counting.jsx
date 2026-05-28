@@ -102,8 +102,10 @@ function handleTouchEnd(e, col, carClass) {
         {UNIVERSAL_CLASSES.map((carClass) => (
           <div key={carClass} className="class-row">
             <button
-              className={`class-btn universal-btn ${lastTapped === `universal-${carClass}` ? 'tapped' : ''}`}
-              onClick={() => handleTap('universal', carClass)}
+              className={`class-btn universal-btn ${lastTapped === `universal-${carClass}` ? 'tapped' : ''}
+              ${lastSwiped === `universal-${carClass}` ? 'swiped' : ''}`}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={(e) => handleTouchEnd(e, 'universal', carClass)}
             >
               <span className="class-name">{carClass}</span>
               <span className="class-count">{counts.universal[carClass] ?? 0}</span>
