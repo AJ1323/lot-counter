@@ -2,15 +2,18 @@
 ## Author: Austin Morris
 ## Date: 28/05/2026
 
-This is A simple app for manual inventory. Coded in React as it is a small app that currently will be used by only a few devices. Right now it is specialized for Avis car classes but can be expanded in the future.
+This is A simple app for manual inventory. Currently coded specifically for Avis Budget car classes. But could be updated to include saved users or orgs which will load unique inventory classes. Coded in React it currently uses states and arrays to manage viewing. 
 
-# Next updates
+# How to use current update.
+There is a help page that the user will be directed to view by a popup until it is viewed. The counting page contains three lists of buttons. The 'clean' and 'dirty' columns are indicated with a title and there is a 3rd column with buttons that span the page as these are neither clean nor dirty. 
 
-Will be adding a "New Cars" button on the counting screen which will take you to a 'Sub Lot' page. The results will show the sub lot and the "home" page will have it stored under the larger lot when finished counting
+There is also a button that will open a New Cars page. When pressed it will open a new car counting page. This page is a single column of buttons. The total new cars will be added to the total but the results are 2 separate states that can be viewed. 
 
-## React Compiler
+The entry page has a counted lots section that will have a column of buttons to view the results of past counted lots and if there were new cars counted on that lot. Those can be viewed by pressing the respective buttons. 
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+# Next Update
 
-Note: This will impact Vite dev & build performances.
+The next update will include a way to press and hold a previously counted lot to "reopen" the lot in case something was missed. 
+
+
 
