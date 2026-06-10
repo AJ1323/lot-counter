@@ -2,7 +2,7 @@
 ## Author: Austin Morris
 ## Date: 28/05/2026
 
-This is A simple app for manual inventory. Currently coded specifically for Avis Budget car classes. But could be updated to include saved users or orgs which will load unique inventory classes. Coded in React it currently uses states and arrays to manage viewing. 
+A simple app for manual inventory. Currently coded specifically for Avis Budget car classes. But could be updated to include saved users or orgs which will load unique inventory classes. Coded in React it currently uses states and arrays to manage viewing. 
 
 # How to use current update.
 There is a help page that the user will be directed to view by a popup until it is viewed. The counting page contains three lists of buttons. The 'clean' and 'dirty' columns are indicated with a title and there is a 3rd column with buttons that span the page as these are neither clean nor dirty. 
