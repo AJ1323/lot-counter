@@ -45,7 +45,7 @@ export default function LotEntry({ onStart, countedLots, onViewLot, onViewNewCar
             {showTooltip && (
               <div className="help-tooltip" onClick={() => setShowTooltip(false)}>
                 <span>Not sure how this works? Tap here dummy.
-                      Also if you don't look at it this will never go away.
+                      Also, if you don't look at it this popup show up everytime you open the app.
                 </span>
                 <div className="help-tooltip-arrow" />
               </div>

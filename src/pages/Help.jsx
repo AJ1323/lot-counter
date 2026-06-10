@@ -12,12 +12,12 @@ export default function HelpModal({ onClose }) {
 
         <div className="help-section">
           <h3>Clean / Dirty</h3>
-          <p>Each car class has two buttons — left for Clean, right for Dirty. Count each car in the correct column.</p>
+          <p>Each car class has two buttons: left for Clean, right for Dirty. Count each car in the correct column.</p>
         </div>
 
         <div className="help-section">
-          <h3>Universal Classes</h3>
-          <p>PM, REG, SOLD, etc. appear at the bottom and don't have a clean/dirty split — just tap to count.</p>
+          <h3>Non-Rentable</h3>
+          <p>PM, REG, SOLD, etc. appear at the bottom and don't have a clean/dirty split, just tap to count.</p>
         </div>
 
         <div className="help-section">
