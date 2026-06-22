@@ -64,7 +64,7 @@ function ResultRows({ classes, data, maxVal }) {
   })
 }
 //To handle the share button by encoding it into a URL.
-function handleShare() {
+function handleShare( lotName ) {
   console.log('origin:', window.location.origin)
   console.log('share available:', !!navigator.share)
 
@@ -180,13 +180,13 @@ export default function Results({ lotName, counts, newCarCounts, onNextLot, isRe
             className={`btn btn-newcars-toggle ${showNewCars ? 'btn-newcars-toggle--active' : ''}`}
             onClick={() => setShowNewCars(v => !v)}
           >
-            {showNewCars ? '← Full Lot Results' : '🚘 New Cars Results'}
+            {showNewCars ? '← Full Lot Results' : 'New Cars Results:'}
           </button>
           <button className="btn btn-primary btn-next" onClick={onNextLot}>
             {isReviewing ? 'Done' : 'Next Lot →'}
           </button>
 
-          <button className="btn btn-share" onClick={handleShare}>
+          <button className="btn btn-share" onClick={handleShare( lotName )}>
             Share Lot ↗
           </button>
         </div>
