@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import LotEntry from './pages/LotEntry'
 import Counting from './pages/Counting'
 import Results from './pages/Results'
@@ -24,7 +24,7 @@ useEffect(() => {
   try {
     const lot = JSON.parse(atob(raw))
     setImportPrompt(lot)
-    // So refresh does not retrigger the loadin
+    // So refresh does not retrigger the load in prompt.
     window.history.replaceState({}, '', window.location.pathname)
   } catch {
     // malformed payload — silently ignore
