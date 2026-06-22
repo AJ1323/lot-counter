@@ -63,8 +63,13 @@ function ResultRows({ classes, data, maxVal }) {
     )
   })
 }
-//To handle the share button by encoding it into a URL.
-function handleShare( lotName ) {
+
+ 
+export default function Results({ lotName, counts, newCarCounts, onNextLot, isReviewing, startOnNewCars = false }) {
+  const [showNewCars, setShowNewCars] = useState(startOnNewCars)
+
+  //To handle the share button by encoding it into a URL.
+function handleShare() {
   console.log('origin:', window.location.origin)
   console.log('share available:', !!navigator.share)
 
@@ -86,9 +91,6 @@ function handleShare( lotName ) {
     
   }
 }
- 
-export default function Results({ lotName, counts, newCarCounts, onNextLot, isReviewing, startOnNewCars = false }) {
-  const [showNewCars, setShowNewCars] = useState(startOnNewCars)
  
   const clean = counts.clean ?? {}
   const dirty = counts.dirty ?? {}
@@ -186,7 +188,7 @@ export default function Results({ lotName, counts, newCarCounts, onNextLot, isRe
             {isReviewing ? 'Done' : 'Next Lot →'}
           </button>
 
-          <button className="btn btn-share" onClick={handleShare( lotName, counts, newCarCounts )}>
+          <button className="btn btn-share" onClick={handleShare}>
             Share Lot ↗
           </button>
         </div>
