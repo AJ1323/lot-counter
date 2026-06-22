@@ -805,6 +805,17 @@ body {
   width: 100%;
 }
 
+.btn-share{
+  background: rgb(20, 124, 250);
+  color:rgb(251, 249, 249);
+  border-radius: 10px;
+  padding: 12px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  width: 100%;
+
+}
+
 .btn-newcars-toggle--active {
   background: #052e16;
   border-color: #86efac;
