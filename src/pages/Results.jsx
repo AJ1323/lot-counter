@@ -65,15 +65,22 @@ function ResultRows({ classes, data, maxVal }) {
 }
 //To handle the share button by encoding it into a URL.
 function handleShare() {
+  console.log('origin:', window.location.origin)
+  console.log('share available:', !!navigator.share)
+
   const payload = btoa(JSON.stringify({
     name: lotName,
     counts,
     newCarCounts
   }))
   const url = `${window.location.origin}?import=${payload}`
+  console.log('url length:', url.length)
   if (navigator.share) {
     navigator.share({ title: `LotCounter — ${lotName}`, url })
+     
+     .catch((err) => console.log('share error:', err))
   } else {
+    console.log('navigator.share not available')
     //In case it's used on desktop.
     navigator.clipboard.writeText(url)
     
