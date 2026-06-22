@@ -186,7 +186,7 @@ export default function Results({ lotName, counts, newCarCounts, onNextLot, isRe
             {isReviewing ? 'Done' : 'Next Lot →'}
           </button>
 
-          <button className="btn btn-share" onClick={handleShare( lotName )}>
+          <button className="btn btn-share" onClick={handleShare( lotName, counts, newCarCounts )}>
             Share Lot ↗
           </button>
         </div>
