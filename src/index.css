@@ -812,6 +812,56 @@ body {
 }
 
 /* ─────────────────────────────────────────
+   IMPORT PROMPT
+───────────────────────────────────────── */
+.import-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: pageFadeIn 0.2s ease both;
+}
+
+.import-modal {
+  background: var(--surface);
+  border: 1.5px solid rgba(255,255,255,0.1);
+  border-radius: var(--radius-lg);
+  padding: 28px 22px 22px;
+  max-width: 420px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.import-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+}
+
+.import-lot-name {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  color: var(--accent);
+  word-break: break-word;
+}
+
+.import-sub {
+  font-size: 0.9rem;
+  color: rgba(239,239,239,0.6);
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ─────────────────────────────────────────
    HELP BUTTON & TOOLTIP
 ───────────────────────────────────────── */
 .help-btn-wrap {
@@ -883,7 +933,7 @@ body {
 }
 
 /* ─────────────────────────────────────────
-   HELP MODAL
+   HELP POPUP
 ───────────────────────────────────────── */
 .help-overlay {
   position: fixed;

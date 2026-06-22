@@ -15,6 +15,21 @@ const [newCarCounts, setNewCarCounts] = useState({})
 const [countedLots, setCountedLots] = useState([])
 const [viewingLot, setViewingLot] = useState(null)
 const [viewNewCars, setViewNewCars] = useState(false) 
+const [importPrompt, setImportPrompt] = useState(null)
+
+useEffect(() => {
+  const params = new URLSearchParams(window.location.search)
+  const raw = params.get('import')
+  if (!raw) return
+  try {
+    const lot = JSON.parse(atob(raw))
+    setImportPrompt(lot)
+    // So refresh does not retrigger the loadin
+    window.history.replaceState({}, '', window.location.pathname)
+  } catch {
+    // malformed payload — silently ignore
+  }
+}, [])
 
 const handleStart = (name) => {
   setLotName(name)
@@ -55,7 +70,6 @@ function handleFinishedCounting() {
   setViewingLot(null)
 }
 
-
   return (
     <div className="app-shell">
       {page === 'entry' && (
@@ -83,6 +97,25 @@ function handleFinishedCounting() {
           }
         />
       )}
+      
+      {importPrompt && (
+  <div className="import-overlay">
+    <div className="import-modal">
+      <p className="import-label">Lot received</p>
+      <h2 className="import-lot-name">{importPrompt.name}</h2>
+      <p className="import-sub">Add this to your counted lots?</p>
+      <button className="btn btn-primary" onClick={() => {
+        setCountedLots(prev => [...prev, importPrompt])
+        setImportPrompt(null)
+      }}>
+        Add to My Lots
+      </button>
+      <button className="btn btn-finish" onClick={() => setImportPrompt(null)}>
+        Dismiss
+      </button>
+    </div>
+  </div>
+)}
     </div>
   )
 }

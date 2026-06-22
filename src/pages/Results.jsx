@@ -63,6 +63,22 @@ function ResultRows({ classes, data, maxVal }) {
     )
   })
 }
+//To handle the share button by encoding it into a URL.
+function handleShare() {
+  const payload = btoa(JSON.stringify({
+    name: lotName,
+    counts,
+    newCarCounts
+  }))
+  const url = `${window.location.origin}?import=${payload}`
+  if (navigator.share) {
+    navigator.share({ title: `LotCounter — ${lotName}`, url })
+  } else {
+    //In case it's used on desktop.
+    navigator.clipboard.writeText(url)
+    
+  }
+}
  
 export default function Results({ lotName, counts, newCarCounts, onNextLot, isReviewing, startOnNewCars = false }) {
   const [showNewCars, setShowNewCars] = useState(startOnNewCars)
@@ -93,13 +109,13 @@ export default function Results({ lotName, counts, newCarCounts, onNextLot, isRe
         <div className="results-header">
           {showNewCars ? (
             <>
-              <p className="results-meta">New Cars sub-lot for</p>
+              <p className="results-meta">New Cars at:</p>
               <h2 className="results-lot">{lotName}</h2>
-              <span className="newcar-sublot-pill">🚘 NEW CARS · {ncTotal} total</span>
+              <span className="newcar-sublot-pill">NEW CARS · {ncTotal} total</span>
             </>
           ) : (
             <>
-              <p className="results-meta">Results for</p>
+              <p className="results-meta">Results for:</p>
               <h2 className="results-lot">{lotName}</h2>
             </>
           )}
@@ -161,6 +177,10 @@ export default function Results({ lotName, counts, newCarCounts, onNextLot, isRe
           </button>
           <button className="btn btn-primary btn-next" onClick={onNextLot}>
             {isReviewing ? 'Done' : 'Next Lot →'}
+          </button>
+
+          <button className="btn btn-share" onClick={handleShare}>
+            Share Lot ↗
           </button>
         </div>
  
