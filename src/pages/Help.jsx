@@ -35,6 +35,12 @@ export default function HelpModal({ onClose }) {
           <p>Once all lots are done, tap <strong>Finished Counting</strong> on the entry page to clear everything and start fresh.</p>
         </div>
 
+        <div className="help-section">
+          <h3>Share counted lots.</h3>
+          <p>Once you have counted a single lot a share lots button will appear below the counted lots section. 
+            Once you are finished counting all the lots, tap <strong>Share Lots ↗</strong> on the entry page to send them via text message.</p>
+        </div>
+
         <button className="btn btn-primary help-got-it" onClick={onClose}>
           Got it
         </button>

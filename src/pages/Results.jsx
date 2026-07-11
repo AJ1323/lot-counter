@@ -68,29 +68,6 @@ function ResultRows({ classes, data, maxVal }) {
 export default function Results({ lotName, counts, newCarCounts, onNextLot, isReviewing, startOnNewCars = false }) {
   const [showNewCars, setShowNewCars] = useState(startOnNewCars)
 
-  //To handle the share button by encoding it into a URL.
-function handleShare() {
-  console.log('origin:', window.location.origin)
-  console.log('share available:', !!navigator.share)
-
-  const payload = btoa(JSON.stringify({
-    name: lotName,
-    counts,
-    newCarCounts
-  }))
-  const url = `${window.location.origin}?import=${payload}`
-  console.log('url length:', url.length)
-  if (navigator.share) {
-    navigator.share({ title: `LotCounter — ${lotName}`, url })
-     
-     .catch((err) => console.log('share error:', err))
-  } else {
-    console.log('navigator.share not available')
-    //In case it's used on desktop.
-    navigator.clipboard.writeText(url)
-    
-  }
-}
  
   const clean = counts.clean ?? {}
   const dirty = counts.dirty ?? {}
@@ -126,6 +103,7 @@ function handleShare() {
             <>
               <p className="results-meta">Results for:</p>
               <h2 className="results-lot">{lotName}</h2>
+
             </>
           )}
         </div>
@@ -188,9 +166,7 @@ function handleShare() {
             {isReviewing ? 'Done' : 'Next Lot →'}
           </button>
 
-          <button className="btn btn-share" onClick={handleShare}>
-            Share Lot ↗
-          </button>
+          
         </div>
  
       </div>

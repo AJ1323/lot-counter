@@ -22,9 +22,10 @@ useEffect(() => {
   const raw = params.get('import')
   if (!raw) return
   try {
-    const lot = JSON.parse(atob(raw))
-    setImportPrompt(lot)
-    // So refresh does not retrigger the load in prompt.
+    const parsed = JSON.parse(atob(raw))
+    // Handle both single-lot and array payloads
+    const lots = Array.isArray(parsed) ? parsed : [parsed]
+    setImportPrompt(lots)
     window.history.replaceState({}, '', window.location.pathname)
   } catch {
     // malformed payload — silently ignore

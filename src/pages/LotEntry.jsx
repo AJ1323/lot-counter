@@ -28,6 +28,23 @@ export default function LotEntry({ onStart, countedLots, onViewLot, onViewNewCar
     if (e.key === 'Enter') handleSubmit()
   }
 
+  //To handle the share button by encoding it into a URL.
+function handleShare() {
+  
+  const payload = btoa(JSON.stringify( countedLots) )
+  const url = `${window.location.origin}?import=${payload}`
+  
+  if (navigator.share) {
+    navigator.share({ title: `LotCounter — Counted Lots`, url })
+     
+     .catch((err) => console.log('share error:', err))
+  } else {
+    //In case it's used on desktop.
+    navigator.clipboard.writeText(url)
+    
+  }
+}
+
   return (
     <div className="page entry-page">
       <div className="entry-card">
@@ -113,6 +130,12 @@ export default function LotEntry({ onStart, countedLots, onViewLot, onViewNewCar
             )
           })}
         </div>
+
+        {countedLots.length > 0 && (
+        <button className="btn btn-share" onClick={handleShare}>
+          Share Lot(s) ↗
+        </button>
+)}
 
         <button className="btn btn-finish" onClick={onFinishedCounting}>
           Finished Counting
