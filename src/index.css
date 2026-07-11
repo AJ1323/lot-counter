@@ -252,7 +252,6 @@ body {
 
 /* ── New cars sub-row: indented, green-tinted ── */
 .counted-newcar-btn {
-  margin-left: 10px;
   width: auto;  
   align-self: stretch;
   background: rgba(74, 222, 128, 0.07);
