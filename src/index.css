@@ -253,13 +253,13 @@ body {
 /* ── New cars sub-row: indented, green-tinted ── */
 .counted-newcar-btn {
   margin-left: 20px;
-  width: calc(100% - 20px);
+  width: auto;  
+  align-self: stretch;
   background: rgba(74, 222, 128, 0.07);
   border: 1px solid rgba(74, 222, 128, 0.25);
   padding: 8px 12px;
   font-size: 0.85rem;
-  box-sizing: border-box;
-  max-width: 100%;
+  
 }
 
 .counted-newcar-btn:active {
