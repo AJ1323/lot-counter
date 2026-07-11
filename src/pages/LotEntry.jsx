@@ -122,7 +122,7 @@ function handleShare() {
                     onClick={() => onViewNewCars(lot)}
                   >
                     <span className="counted-newcar-indicator">↳</span>
-                    <span className="counted-lot-name counted-newcar-name">New Cars</span>
+                    <span className="counted-lot-name counted-newcar-name">{lot.name}'s New Cars</span>
                     <span className="counted-lot-total counted-newcar-total">{ncTotal}</span>
                   </button>
                 )}
