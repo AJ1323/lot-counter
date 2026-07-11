@@ -102,13 +102,15 @@ function handleFinishedCounting() {
       {importPrompt && (
   <div className="import-overlay">
     <div className="import-modal">
-      <p className="import-label">Lot received</p>
-      <h2 className="import-lot-name">{importPrompt.name}</h2>
-      <p className="import-sub">Add this to your counted lots?</p>
+      <p className="import-label">Lot(s) received</p>
+      <h2 className="import-lot-name">
+        {importPrompt.map(l => l.name).join(', ')}
+      </h2>
+      <p className="import-sub">Add this/these to your counted lots?</p>
       <button className="btn btn-primary" onClick={() => {
-        setCountedLots(prev => [...prev, importPrompt])
+        setCountedLots(prev => [...prev, ...importPrompt]) 
         setImportPrompt(null)
-      }}>
+            }}>
         Add to My Lots
       </button>
       <button className="btn btn-finish" onClick={() => setImportPrompt(null)}>
