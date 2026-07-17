@@ -11,9 +11,11 @@ There is also a button that will open a New Cars page. When pressed it will open
 
 The entry page has a counted lots section that will have a column of buttons to view the results of past counted lots and if there were new cars counted on that lot. Those can be viewed by pressing the respective buttons. 
 
+You can press and hold a previously counted lot to "reopen" the counting page in case something was missed. 
+
 # Next Update
 
-The next update will include a way to press and hold a previously counted lot to "reopen" the lot in case something was missed. 
+? Currently considering ways to improve the app.  
 
 
 
