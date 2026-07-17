@@ -7,19 +7,22 @@ const REGULAR_CLASSES = ['A/B', 'C', 'D/E','G','H', 'F', 'W', 'S', 'Z', 'L', 'V'
 const UNIVERSAL_CLASSES = ['PM', 'REG', 'DETAIL', 'WHSL/SELL/TRBK', 'OOS/Recall',
   'SOLD', 'TIRE', 'PARTS/BD/GLASS', 'NO KEY']
  
-export default function Counting({ lotName, onFinish }) {
-  const [counts, setCounts] = useState({ clean: {}, dirty: {}, universal: {} })
-  // Flat map for new cars — no clean/dirty distinction
-  const [newCarCounts, setNewCarCounts] = useState({})
-  const [showNewCars, setShowNewCars] = useState(false)
+export default function Counting({ lotName, onFinish, initialCounts, 
+  initialNewCarCounts}) {
+  const [counts, setCounts] = useState( { 
+    clean: initialCounts?.clean ?? {},
+    dirty: initialCounts?.dirty ?? {},
+    universal: initialCounts?.universal ?? {}} )
+  const [newCarCounts, setNewCarCounts] = useState( initialNewCarCounts ?? {} )
+  const [showNewCars, setShowNewCars] = useState( false )
   const [lastTapped, setLastTapped] = useState(null)
   const [lastSwiped, setLastSwiped] = useState(null)
  
-  const totalClean = Object.values(counts.clean).reduce((a, b) => a + b, 0)
-  const totalDirty = Object.values(counts.dirty).reduce((a, b) => a + b, 0)
-  const totalUniversal = Object.values(counts.universal).reduce((a, b) => a + b, 0)
+  const totalClean = Object.values(counts.clean ?? {}).reduce((a, b) => a + b, 0)
+  const totalDirty = Object.values(counts.dirty ?? {}).reduce((a, b) => a + b, 0)
+  const totalUniversal = Object.values(counts.universal ?? {}).reduce((a, b) => a + b, 0)
  
-  const newCarTotal = Object.values(newCarCounts).reduce((a, b) => a + b, 0)
+  const newCarTotal = Object.values(newCarCounts ?? {}).reduce((a, b) => a + b, 0)
   const hasNewCars = newCarTotal > 0
  
   const touchStartX = useRef(null)

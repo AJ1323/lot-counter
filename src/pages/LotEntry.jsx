@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import HelpModal from './Help'
 
+
 // Function for editing counted lots
 function useLongPress( onLongPress, delay = 500 ){
   const timer = useRef( null )
@@ -15,13 +16,24 @@ function useLongPress( onLongPress, delay = 500 ){
   }, [])
 
   return{
-    onmousedown: start,
-    ontouchstart: start,
-    onmouseup: cancel,
-    onmouseleave: cancel,
-    ontouchend: cancel,
-    ontouchmove: cancel,
+    onMouseDown: start,
+    onTouchStart: start,
+    onMouseUp: cancel,
+    onMouseLeave: cancel,
+    onTouchEnd: cancel,
+    onTouchMove: cancel,
   }
+}
+
+// New counted lot buttons so the hook can be called properly
+function CountedLotsButton( { lot, onViewLot, onEditLot, children } ) {
+  const longPressProps = useLongPress( 
+    () => onEditLot( lot ) )  
+  return (
+    <button className="btn counted-lot-btn" onClick={ () => onViewLot( lot )} {...longPressProps}>
+      { children } 
+    </button>
+  )
 }
 
 // Page 1: Lot name entry.
@@ -67,17 +79,6 @@ function handleShare() {
     navigator.clipboard.writeText(url)
     
   }
-}
-
-// New counted lot buttons so the hook can be called properly
-function CountedLotsButton( { lot, onViewLot, onEditLot, onEditNewCars, children } ) {
-  const longPressProps = useLongPress( 
-    () => onEditNewCars ? onEditNewCars( lot ) : onEditLot( lot ) )  
-  return (
-    <button className="btn counted-lot-btn" onClick={ () => onViewLot( lot )} {...longPressProps}>
-      { children } 
-    </button>
-  )
 }
 
   return (
@@ -148,7 +149,7 @@ function CountedLotsButton( { lot, onViewLot, onEditLot, onEditNewCars, children
             return (
               <div key={i} className="counted-lot-group">
                 <CountedLotsButton lot={ lot } onViewLot={ onViewLot } 
-                onEditLot={ onEditLot } onEditNewCars={ onEditNewCars }>
+                onEditLot={ onEditLot }>
 
                   <span className='counted-lot-name'>{ lot.name }</span>
                   <span className='counted-lot-total'>{ total }</span>
@@ -156,7 +157,7 @@ function CountedLotsButton( { lot, onViewLot, onEditLot, onEditNewCars, children
                 </CountedLotsButton>
                 {hasNewCars && (
                   <CountedLotsButton lot={ lot } onViewLot={ onViewLot } 
-                onEditLot={ onEditLot } onEditNewCars={ onEditNewCars }>
+                onEditLot={ onEditLot }>
 
                   <span className="counted-newcar-indicator">↳</span>
                   <span className='counted-lot-name counted-newcar-name'>

@@ -16,7 +16,6 @@ const [countedLots, setCountedLots] = useState( [] )
 const [viewingLot, setViewingLot] = useState( null )
 const [viewNewCars, setViewNewCars] = useState( false ) 
 const [importPrompt, setImportPrompt] = useState( null )
-const [initialShowNewCars, setInitialShowNewCars] = useState( false )
 
 useEffect(() => {
   const params = new URLSearchParams(window.location.search)
@@ -78,17 +77,6 @@ function handleEditLot( lot ){
   setLotName( lot.name )
   setCounts( lot.counts )
   setNewCarCounts( lot.newCarCounts ?? {} )
-  setInitialShowNewCars( false )
-  setPage( 'counting' )
-}
-
-function handleEditNewCars( lot ){
-  const unEditedLots = countedLots.filter( l => l.name !== lot.name )
-  setCountedLots( unEditedLots )
-  setLotName( lot.name )
-  setCounts( lot.counts )
-  setNewCarCounts( lot.newCarCounts ?? {} )
-  setInitialShowNewCars( true )
   setPage( 'counting' )
 }
 
@@ -96,19 +84,19 @@ function handleEditNewCars( lot ){
     <div className="app-shell">
       {page === 'entry' && (
        <LotEntry
-      onStart={handleStart}
-      countedLots={countedLots}
-      onViewLot={handleViewLot}
-      onViewNewCars={handleViewNewCars}
-      onFinishedCounting={handleFinishedCounting}
+      onStart={ handleStart }
+      countedLots={ countedLots }
+      onViewLot={ handleViewLot }
+      onViewNewCars={ handleViewNewCars }
+      onEditLot={ handleEditLot } 
+      onFinishedCounting={ handleFinishedCounting }
       />
       )}
       {page === 'counting' && 
       <Counting 
       lotName={ lotName } 
-      intitialCounts={ counts }
-      intitialNewCarCounts={ newCarCounts }
-      initialShowNewCars={ initialShowNewCars }
+      initialCounts={ counts }
+      initialNewCarCounts={ newCarCounts }
       onFinish={ handleFinish }
       />}
 

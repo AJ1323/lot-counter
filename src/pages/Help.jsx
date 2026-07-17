@@ -41,6 +41,14 @@ export default function HelpModal({ onClose }) {
             Once you are finished counting all the lots, tap <strong>Share Lots ↗</strong> on the entry page to send them via text message.</p>
         </div>
 
+        <div className="help-section">
+          <h3>Edit Counted Lots</h3>
+          <p>If you want to edit a previously counted lot simply press and hold the lot you would like to edit. This will bring up the
+            counting page for that lot. You can edit regular and new cars the same as when you first counted the lot. ( this paragraph has
+            way too many "lots" in it. ).
+          </p>
+        </div>
+
         <button className="btn btn-primary help-got-it" onClick={onClose}>
           Got it
         </button>
