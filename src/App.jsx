@@ -8,14 +8,15 @@ export default function App() {
 // Use states instead of a router as this is a fairly simple app.
 // 3 main pages while "Storing" in an array the states of "past" results
 //pages that can be viewed.
-const [page, setPage] = useState('entry')       
-const [lotName, setLotName] = useState('')
-const [counts, setCounts] = useState({})
-const [newCarCounts, setNewCarCounts] = useState({})
-const [countedLots, setCountedLots] = useState([])
-const [viewingLot, setViewingLot] = useState(null)
-const [viewNewCars, setViewNewCars] = useState(false) 
-const [importPrompt, setImportPrompt] = useState(null)
+const [page, setPage] = useState( 'entry' )       
+const [lotName, setLotName] = useState( '' )
+const [counts, setCounts] = useState( {} )
+const [newCarCounts, setNewCarCounts] = useState( {} )
+const [countedLots, setCountedLots] = useState( [] )
+const [viewingLot, setViewingLot] = useState( null )
+const [viewNewCars, setViewNewCars] = useState( false ) 
+const [importPrompt, setImportPrompt] = useState( null )
+const [initialShowNewCars, setInitialShowNewCars] = useState( false )
 
 useEffect(() => {
   const params = new URLSearchParams(window.location.search)
@@ -71,6 +72,26 @@ function handleFinishedCounting() {
   setViewingLot(null)
 }
 
+function handleEditLot( lot ){
+  const unEditedLots = countedLots.filter( l => l.name !== lot.name )
+  setCountedLots( unEditedLots )
+  setLotName( lot.name )
+  setCounts( lot.counts )
+  setNewCarCounts( lot.newCarCounts ?? {} )
+  setInitialShowNewCars( false )
+  setPage( 'counting' )
+}
+
+function handleEditNewCars( lot ){
+  const unEditedLots = countedLots.filter( l => l.name !== lot.name )
+  setCountedLots( unEditedLots )
+  setLotName( lot.name )
+  setCounts( lot.counts )
+  setNewCarCounts( lot.newCarCounts ?? {} )
+  setInitialShowNewCars( true )
+  setPage( 'counting' )
+}
+
   return (
     <div className="app-shell">
       {page === 'entry' && (
@@ -82,7 +103,14 @@ function handleFinishedCounting() {
       onFinishedCounting={handleFinishedCounting}
       />
       )}
-      {page === 'counting' && <Counting lotName={lotName} onFinish={handleFinish} />}
+      {page === 'counting' && 
+      <Counting 
+      lotName={ lotName } 
+      intitialCounts={ counts }
+      intitialNewCarCounts={ newCarCounts }
+      initialShowNewCars={ initialShowNewCars }
+      onFinish={ handleFinish }
+      />}
 
       {page === 'results' && (
         <Results

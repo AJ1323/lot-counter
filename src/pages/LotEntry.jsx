@@ -1,8 +1,32 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef, useCallback } from 'react'
 import HelpModal from './Help'
 
+// Function for editing counted lots
+function useLongPress( onLongPress, delay = 500 ){
+  const timer = useRef( null )
+
+  const start = useCallback( ( e ) => {
+    e.preventDefault()
+    timer.current = setTimeout( () => onLongPress(), delay )
+  }, [ onLongPress, delay ])
+
+  const cancel = useCallback( () => {
+    clearTimeout( timer.current )
+  }, [])
+
+  return{
+    onmousedown: start,
+    ontouchstart: start,
+    onmouseup: cancel,
+    onmouseleave: cancel,
+    ontouchend: cancel,
+    ontouchmove: cancel,
+  }
+}
+
 // Page 1: Lot name entry.
-export default function LotEntry({ onStart, countedLots, onViewLot, onViewNewCars, onFinishedCounting }) {
+export default function LotEntry({ onStart, countedLots, onViewLot, onViewNewCars, 
+  onFinishedCounting, onEditLot }) {
   const [value, setValue] = useState('')
   const [showHelp, setShowHelp] = useState(false)
   const [showTooltip, setShowTooltip] = useState(false)
@@ -43,6 +67,17 @@ function handleShare() {
     navigator.clipboard.writeText(url)
     
   }
+}
+
+// New counted lot buttons so the hook can be called properly
+function CountedLotsButton( { lot, onViewLot, onEditLot, onEditNewCars, children } ) {
+  const longPressProps = useLongPress( 
+    () => onEditNewCars ? onEditNewCars( lot ) : onEditLot( lot ) )  
+  return (
+    <button className="btn counted-lot-btn" onClick={ () => onViewLot( lot )} {...longPressProps}>
+      { children } 
+    </button>
+  )
 }
 
   return (
@@ -112,19 +147,26 @@ function handleShare() {
 
             return (
               <div key={i} className="counted-lot-group">
-                <button className="btn counted-lot-btn" onClick={() => onViewLot(lot)}>
-                  <span className="counted-lot-name">{lot.name}</span>
-                  <span className="counted-lot-total">{total}</span>
-                </button>
+                <CountedLotsButton lot={ lot } onViewLot={ onViewLot } 
+                onEditLot={ onEditLot } onEditNewCars={ onEditNewCars }>
+
+                  <span className='counted-lot-name'>{ lot.name }</span>
+                  <span className='counted-lot-total'>{ total }</span>
+
+                </CountedLotsButton>
                 {hasNewCars && (
-                  <button
-                    className="btn counted-lot-btn counted-newcar-btn"
-                    onClick={() => onViewNewCars(lot)}
-                  >
-                    <span className="counted-newcar-indicator">↳</span>
-                    <span className="counted-lot-name counted-newcar-name">{lot.name}'s New Cars</span>
-                    <span className="counted-lot-total counted-newcar-total">{ncTotal}</span>
-                  </button>
+                  <CountedLotsButton lot={ lot } onViewLot={ onViewLot } 
+                onEditLot={ onEditLot } onEditNewCars={ onEditNewCars }>
+
+                  <span className="counted-newcar-indicator">↳</span>
+                  <span className='counted-lot-name counted-newcar-name'>
+                    { lot.name }'s New Cars
+                  </span>
+                  <span className='counted-lot-total counted-newcar-total'>
+                    { ncTotal }
+                  </span>
+
+                </CountedLotsButton>
                 )}
               </div>
             )
