@@ -85,7 +85,7 @@ body {
 ───────────────────────────────────────── */
 .entry-page {
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   padding-inline: 28px;
 }
 
@@ -96,6 +96,8 @@ body {
   display: flex;
   flex-direction: column;
   gap: 14px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   overflow: hidden;
 }
 
@@ -213,7 +215,7 @@ body {
 .counted-lot-btn {
   background: var(--surface);
   border: 1.5px solid rgba(255,255,255,0.13);
-  border-radius: var(--radius-md);
+  border-radius: 0;
   color: var(--text);
   display: flex;
   justify-content: space-between;
@@ -257,6 +259,7 @@ body {
   background: rgba(74, 222, 128, 0.07);
   border: 1px solid rgba(74, 222, 128, 0.25);
   padding: 8px 12px;
+  border-radius: 0;
   font-size: 0.85rem;
   
 }
@@ -289,7 +292,7 @@ body {
 ───────────────────────────────────────── */
 .btn {
   border: none;
-  border-radius: var(--radius-md);
+  border-radius: 0;
   cursor: pointer;
   font-family: 'Syne', sans-serif;
   font-size: 17px;
@@ -326,7 +329,7 @@ body {
 .btn-share{
   background: rgb(20, 124, 250);
   color:rgb(251, 249, 249);
-  border-radius: 10px;
+  border-radius: 0;
   padding: 12px;
   font-size: 0.95rem;
   font-weight: 600;

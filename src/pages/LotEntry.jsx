@@ -181,7 +181,7 @@ function handleShare() {
 )}
 
         <button className="btn btn-finish" onClick={onFinishedCounting}>
-          Finished Counting
+          Delete Lot( s )
         </button>
       </div>
 
