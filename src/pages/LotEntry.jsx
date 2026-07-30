@@ -68,6 +68,9 @@ export default function LotEntry({ onStart, countedLots, onViewLot, onViewNewCar
 function handleShare() {
   
   const payload = btoa(JSON.stringify( countedLots) )
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=/g, '')
   const url = `${window.location.origin}?import=${payload}`
   
   if (navigator.share) {
