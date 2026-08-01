@@ -64,14 +64,31 @@ export default function LotEntry({ onStart, countedLots, onViewLot, onViewNewCar
     if (e.key === 'Enter') handleSubmit()
   }
 
+  function stripZeros(counts) {
+  const result = {}
+  for ( const col in counts ) {
+    const filtered = Object.fromEntries(
+      Object.entries(counts[col]).filter(([, v]) => v > 0)
+    )
+    if (Object.keys(filtered).length > 0) result[col] = filtered
+  }
+  return result
+}
+
   //To handle the share button by encoding it into a URL.
 function handleShare() {
   
-  const payload = btoa(JSON.stringify( countedLots) )
+  const payload = btoa( JSON.stringify( countedLots.map(lot => ({
+    ...lot,
+    counts: stripZeros(lot.counts)
+   })) ) )
+    .replace(/\+/g, '-')
+    .replace(/\//g, '_')
+    .replace(/=/g, '')
   const url = `${window.location.origin}?import=${payload}`
 
-  console.log('payload:', payload)
-  console.log('full url:', url)
+  console.log('payload:', payload.length)
+  console.log('full url:', url.length)
   
   if (navigator.share) {
     navigator.share({ title: `LotCounter — Counted Lots`, url })

@@ -17,18 +17,27 @@ const [viewingLot, setViewingLot] = useState( null )
 const [viewNewCars, setViewNewCars] = useState( false ) 
 const [importPrompt, setImportPrompt] = useState( null )
 
+
+
 useEffect(() => {
+  console.log('full search string:', window.location.search)
   const params = new URLSearchParams(window.location.search)
   const raw = params.get('import')
-  if (!raw) return
+  if ( !raw ) return
   try {
-    const parsed = JSON.parse( atob( raw ) )
+
+    const base64 = raw
+      .replace(/-/g, '+')
+      .replace(/_/g, '/')
+
+    const parsed = JSON.parse( atob( base64 ) )
     // Handle both single-lot and array payloads
     const lots = Array.isArray(parsed) ? parsed : [parsed]
     setImportPrompt(lots)
     window.history.replaceState({}, '', window.location.pathname)
-  } catch {
+  } catch ( e ){
     // malformed payload — silently ignore
+    console.log( e ) 
   }
 }, [])
 
