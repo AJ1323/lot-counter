@@ -20,12 +20,9 @@ const [importPrompt, setImportPrompt] = useState( null )
 useEffect(() => {
   const params = new URLSearchParams(window.location.search)
   const raw = params.get('import')
-  const base64 = raw
-    .replace(/-/g, '+')
-    .replace(/_/g, '/')
   if (!raw) return
   try {
-    const parsed = JSON.parse( atob( base64 ) )
+    const parsed = JSON.parse( atob( raw ) )
     // Handle both single-lot and array payloads
     const lots = Array.isArray(parsed) ? parsed : [parsed]
     setImportPrompt(lots)
